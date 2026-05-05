@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { Leaf, Instagram, Facebook, Twitter, Youtube } from "lucide-react";
+import { Instagram, Facebook, Twitter, Youtube } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 export function Footer() {
   return (
@@ -7,20 +8,26 @@ export function Footer() {
       <div className="container mx-auto px-6 py-16 grid gap-12 md:grid-cols-4">
         <div className="md:col-span-2 max-w-sm">
           <div className="flex items-center gap-2 mb-4">
-            <span className="grid place-items-center h-9 w-9 rounded-full gradient-primary">
-              <Leaf className="h-4 w-4 text-primary-foreground" />
-            </span>
-            <span className="font-display text-2xl font-semibold">PASKIN</span>
+            <Link to="/" className="bg-white px-3 py-2 rounded-xl inline-block transition-transform hover:scale-105 active:scale-95 shadow-sm hover:shadow-md">
+              <img src={logo} alt="PASKIN" className="h-8 w-auto" />
+            </Link>
           </div>
           <p className="text-sm text-background/70 leading-relaxed">
             Pure herbal wellness rooted in the wisdom of Ayurveda. Crafted with
             care, certified organic, and trusted by thousands.
           </p>
           <div className="flex items-center gap-3 mt-6">
-            {[Instagram, Facebook, Twitter, Youtube].map((Icon, i) => (
+            {[
+              { Icon: Instagram, href: "#" },
+              { Icon: Facebook, href: "https://www.facebook.com/profile.php?id=61578746242700" },
+              { Icon: Twitter, href: "#" },
+              { Icon: Youtube, href: "#" },
+            ].map(({ Icon, href }, i) => (
               <a
                 key={i}
-                href="#"
+                href={href}
+                target={href !== "#" ? "_blank" : undefined}
+                rel={href !== "#" ? "noopener noreferrer" : undefined}
                 aria-label="Social link"
                 className="grid place-items-center h-9 w-9 rounded-full border border-background/20 hover:bg-primary hover:border-primary transition"
               >
@@ -37,8 +44,9 @@ export function Footer() {
           <ul className="space-y-2.5 text-sm text-background/70">
             {[
               { to: "/", label: "Home" },
-              { to: "/about", label: "About" },
-              { to: "/products", label: "Shop" },
+              { to: "/about", label: "Herbal Wellness" },
+              { to: "/products", label: "Pharma" },
+              { to: "/about-us", label: "About Us" },
               { to: "/blog", label: "Blog" },
               { to: "/contact", label: "Contact" },
             ].map((l) => (
