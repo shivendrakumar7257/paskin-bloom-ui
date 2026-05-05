@@ -1,5 +1,5 @@
-import { Link } from "@tanstack/react-router";
-import { Pill, Syringe, Stethoscope, BriefcaseMedical, LayoutGrid, Leaf } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Pill, Syringe, Stethoscope, BriefcaseMedical, Leaf } from "lucide-react";
 import catAntibiotics from "@/assets/cat-antibiotics.png";
 import catDerma from "@/assets/cat-derma.png";
 import catDental from "@/assets/cat-dental.png";

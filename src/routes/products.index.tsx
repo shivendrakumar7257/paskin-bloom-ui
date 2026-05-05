@@ -1,5 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { ProductCard } from "@/components/site/ProductCard";
 import { products } from "@/data/products";
 import { Pill, Stethoscope, BriefcaseMedical, Syringe, Leaf } from "lucide-react";
@@ -7,16 +6,6 @@ import catAntibiotics from "@/assets/cat-antibiotics.png";
 import catDerma from "@/assets/cat-derma.png";
 import catDental from "@/assets/cat-dental.png";
 import catVitamins from "@/assets/cat-vitamins.png";
-
-export const Route = createFileRoute("/products/")({
-  head: () => ({
-    meta: [
-      { title: "Pharma Products — PASKIN" },
-      { name: "description", content: "Explore our range of quality pharmaceutical products." },
-    ],
-  }),
-  component: ProductsPage,
-});
 
 const pharmaCategories = [
   { id: "All", title: "All Products", icon: Leaf, color: "bg-gray-100" },
@@ -26,8 +15,12 @@ const pharmaCategories = [
   { id: "Vitamins & Supplements", title: "Vitamins & Supplements", icon: Syringe, color: "bg-orange-100", image: catVitamins },
 ];
 
-function ProductsPage() {
+export default function ProductsPage() {
   const [selectedCat, setSelectedCat] = useState("All");
+
+  useEffect(() => {
+    document.title = "Pharma Products — PASKIN";
+  }, []);
 
   const filtered = useMemo(() => {
     return selectedCat === "All" 

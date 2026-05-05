@@ -1,23 +1,18 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { CreditCard, Truck, ShieldCheck, MapPin, Building, CreditCard as CardIcon, CheckCircle2, PackageCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/hooks/use-cart";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/checkout")({
-  head: () => ({
-    meta: [
-      { title: "Checkout — PaskinCare" },
-    ],
-  }),
-  component: CheckoutPage,
-});
-
-function CheckoutPage() {
+export default function CheckoutPage() {
   const [step, setStep] = useState(1);
   const [orderSuccess, setOrderSuccess] = useState(false);
   const { items, totalPrice, clearCart } = useCart();
+
+  useEffect(() => {
+    document.title = "Checkout — PaskinCare";
+  }, []);
 
   const handlePlaceOrder = () => {
     setOrderSuccess(true);

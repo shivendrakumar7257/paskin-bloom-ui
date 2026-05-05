@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, NavLink } from "react-router-dom";
 import { Search, ShoppingBag, User, Menu, X, Minus, Plus, Trash2 } from "lucide-react";
 import logo from "@/assets/logo.png";
 import { useEffect, useState } from "react";
@@ -44,15 +44,18 @@ export function Header() {
 
         <nav className="hidden md:flex items-center gap-8">
           {navItems.map((item) => (
-            <Link
+            <NavLink
               key={item.to}
               to={item.to}
-              className="text-sm font-medium text-foreground/75 hover:text-primary transition-colors relative after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-primary after:transition-all hover:after:w-full"
-              activeProps={{ className: "text-primary after:w-full" }}
-              activeOptions={{ exact: item.to === "/" }}
+              className={({ isActive }) => 
+                cn(
+                  "text-sm font-medium text-foreground/75 hover:text-primary transition-colors relative after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-primary after:transition-all hover:after:w-full",
+                  isActive && "text-primary after:w-full"
+                )
+              }
             >
               {item.label}
-            </Link>
+            </NavLink>
           ))}
         </nav>
 
@@ -200,12 +203,11 @@ export function Header() {
               </div>
               <p className="text-xs text-muted-foreground text-center">Shipping & taxes calculated at checkout</p>
               <Link 
-                disabled={items.length === 0}
-                to="/checkout" 
-                onClick={() => setCartOpen(false)} 
+                to={items.length === 0 ? "#" : "/checkout"} 
+                onClick={() => items.length > 0 && setCartOpen(false)} 
                 className={cn(
                   "w-full h-14 bg-primary hover:bg-primary-glow text-white rounded-2xl flex items-center justify-center font-bold text-lg transition-all shadow-lg",
-                  items.length === 0 && "opacity-50 pointer-events-none grayscale"
+                  items.length === 0 && "opacity-50 cursor-not-allowed grayscale"
                 )}
               >
                 Checkout Now
@@ -232,15 +234,18 @@ export function Header() {
             <ul className="flex flex-col gap-2">
               {navItems.map((item) => (
                 <li key={item.to}>
-                  <Link
+                  <NavLink
                     to={item.to}
                     onClick={() => setOpen(false)}
-                    className="block px-4 py-3 rounded-xl hover:bg-slate-50 text-lg font-medium transition-colors"
-                    activeProps={{ className: "bg-primary/5 text-primary" }}
-                    activeOptions={{ exact: item.to === "/" }}
+                    className={({ isActive }) => 
+                      cn(
+                        "block px-4 py-3 rounded-xl hover:bg-slate-50 text-lg font-medium transition-colors",
+                        isActive && "bg-primary/5 text-primary"
+                      )
+                    }
                   >
                     {item.label}
-                  </Link>
+                  </NavLink>
                 </li>
               ))}
             </ul>

@@ -1,19 +1,11 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { Blog as BlogSection } from "@/components/site/Blog";
+import { useEffect } from "react";
 
-export const Route = createFileRoute("/blog")({
-  head: () => ({
-    meta: [
-      { title: "Journal — PASKIN Herbal Wellness Blog" },
-      { name: "description", content: "Tips, traditions and stories from the world of Ayurveda, herbal skincare and natural healing." },
-      { property: "og:title", content: "PASKIN Journal" },
-      { property: "og:description", content: "Stories from the herbal world." },
-    ],
-  }),
-  component: BlogPage,
-});
+export default function BlogPage() {
+  useEffect(() => {
+    document.title = "Journal — PASKIN Herbal Wellness Blog";
+  }, []);
 
-function BlogPage() {
   return (
     <>
       <section className="pt-32 pb-6 container mx-auto px-6 text-center">

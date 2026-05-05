@@ -1,17 +1,13 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { Mail, Lock, User, Phone, ArrowRight } from "lucide-react";
 import logo from "@/assets/logo.png";
+import { useEffect } from "react";
 
-export const Route = createFileRoute("/signup")({
-  head: () => ({
-    meta: [
-      { title: "Sign Up — PASKIN" },
-    ],
-  }),
-  component: SignupPage,
-});
+export default function SignupPage() {
+  useEffect(() => {
+    document.title = "Sign Up — PASKIN";
+  }, []);
 
-function SignupPage() {
   return (
     <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6 pt-32 pb-16">
       <div className="w-full max-w-md">

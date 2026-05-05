@@ -1,18 +1,12 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { ShieldCheck, Truck, RotateCcw, Target, Globe, Award, Sparkles } from "lucide-react";
+import { ShieldCheck, Truck, RotateCcw, Globe, Award, Sparkles } from "lucide-react";
 import aboutHero from "@/assets/about-hero-new.png";
+import { useEffect } from "react";
 
-export const Route = createFileRoute("/about-us")({
-  head: () => ({
-    meta: [
-      { title: "Our Heritage — PaskinCare Premium Pharmaceutical" },
-      { name: "description", content: "A legacy of excellence in global pharmaceutical trading and healthcare innovation." },
-    ],
-  }),
-  component: AboutUsPage,
-});
+export default function AboutUsPage() {
+  useEffect(() => {
+    document.title = "Our Heritage — PaskinCare Premium Pharmaceutical";
+  }, []);
 
-function AboutUsPage() {
   return (
     <div className="bg-white min-h-screen selection:bg-primary/20">
       {/* Luxury Hero Section */}
@@ -72,10 +66,10 @@ function AboutUsPage() {
                <h3 className="font-display text-4xl font-bold">Unwavering Integrity</h3>
                <div className="space-y-6 text-muted-foreground leading-relaxed text-lg">
                 <p>
-                  At Paskin, we understand the critical role that pharmaceuticals play in improving and saving lives. That's why we diligently source and supply a comprehensive range of high-quality medicines, ensuring access to safe and effective treatments for a wide array of medical conditions.
+                   At Paskin, we understand the critical role that pharmaceuticals play in improving and saving lives. That's why we diligently source and supply a comprehensive range of high-quality medicines, ensuring access to safe and effective treatments for a wide array of medical conditions.
                 </p>
                 <p>
-                  Our dedicated team of experts works tirelessly to maintain strong relationships with trusted manufacturers, ensuring that we offer an extensive portfolio of pharmaceutical products that meet the highest quality standards.
+                   Our dedicated team of experts works tirelessly to maintain strong relationships with trusted manufacturers, ensuring that we offer an extensive portfolio of pharmaceutical products that meet the highest quality standards.
                 </p>
                </div>
                <div className="grid grid-cols-2 gap-8 pt-8">

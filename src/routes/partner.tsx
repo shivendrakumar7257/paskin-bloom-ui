@@ -1,20 +1,13 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
-import { Building2, Mail, Phone, MapPin, Send, CheckCircle } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Building2, Mail, Phone, MapPin, Send, CheckCircle, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-export const Route = createFileRoute("/partner")({
-  head: () => ({
-    meta: [
-      { title: "Partner With Us — PASKIN Pharmaceutical Distribution" },
-      { name: "description", content: "Join PASKIN's global network of pharmaceutical distributors and healthcare providers." },
-    ],
-  }),
-  component: PartnerPage,
-});
-
-function PartnerPage() {
+export default function PartnerPage() {
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    document.title = "Partner With Us — PASKIN Pharmaceutical Distribution";
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -142,4 +135,3 @@ function PartnerPage() {
     </div>
   );
 }
-import { Globe } from "lucide-react";

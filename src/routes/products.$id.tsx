@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link, useParams } from "react-router-dom";
 import { useState, useMemo } from "react";
 import { products, DetailedProduct } from "@/data/products";
 import { Star, ShoppingBag, Zap, Heart, ShieldCheck, Truck, RotateCcw, ChevronLeft, CheckCircle2 } from "lucide-react";
@@ -6,12 +6,8 @@ import { Button } from "@/components/ui/button";
 import { useCart } from "@/hooks/use-cart";
 import { ProductCard } from "@/components/site/ProductCard";
 
-export const Route = createFileRoute("/products/$id")({
-  component: ProductDetailsPage,
-});
-
-function ProductDetailsPage() {
-  const { id } = Route.useParams();
+export default function ProductDetailsPage() {
+  const { id } = useParams();
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState("description");
   const { addToCart } = useCart();
@@ -160,19 +156,19 @@ function ProductDetailsPage() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12 pt-12 border-t border-border/50">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
-                  <ShieldCheck className="h-6 w-6" />
+                   <ShieldCheck className="h-6 w-6" />
                 </div>
                 <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground leading-tight">Certified Organic</span>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
-                  <Truck className="h-6 w-6" />
+                   <Truck className="h-6 w-6" />
                 </div>
                 <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground leading-tight">Fast Delivery</span>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
-                  <RotateCcw className="h-6 w-6" />
+                   <RotateCcw className="h-6 w-6" />
                 </div>
                 <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground leading-tight">30 Days Return</span>
               </div>

@@ -1,17 +1,13 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { Mail, Lock, Phone, ArrowRight, Github } from "lucide-react";
 import logo from "@/assets/logo.png";
+import { useEffect } from "react";
 
-export const Route = createFileRoute("/login")({
-  head: () => ({
-    meta: [
-      { title: "Log In — PASKIN" },
-    ],
-  }),
-  component: LoginPage,
-});
+export default function LoginPage() {
+  useEffect(() => {
+    document.title = "Log In — PASKIN";
+  }, []);
 
-function LoginPage() {
   return (
     <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6 pt-32">
       <div className="w-full max-w-md">

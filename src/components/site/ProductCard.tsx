@@ -1,5 +1,5 @@
 import { Heart, ShoppingBag, Star, Zap } from "lucide-react";
-import { Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { useCart } from "@/hooks/use-cart";
 import { cn } from "@/lib/utils";
 
@@ -20,7 +20,7 @@ export function ProductCard({ product }: { product: Product }) {
 
   return (
     <article className="group relative bg-white rounded-3xl overflow-hidden border border-border/50 hover:border-primary/20 transition-all duration-500 hover:shadow-elegant">
-      <Link to="/products/$id" params={{ id: product.id }} className="relative block aspect-[4/5] overflow-hidden bg-slate-50">
+      <Link to={`/products/${product.id}`} className="relative block aspect-[4/5] overflow-hidden bg-slate-50">
         <img
           src={product.image}
           alt={product.name}
@@ -77,7 +77,7 @@ export function ProductCard({ product }: { product: Product }) {
           </div>
         </div>
         
-        <Link to="/products/$id" params={{ id: product.id }} className="block mb-3">
+        <Link to={`/products/${product.id}`} className="block mb-3">
           <h3 className="font-display text-lg font-bold leading-tight hover:text-primary transition-colors line-clamp-1">
             {product.name}
           </h3>

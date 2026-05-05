@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { Leaf, ShoppingBag, Zap } from "lucide-react";
 import capsulesImg from "@/assets/sea-buckthorn-capsules.png";
 import pulpImg from "@/assets/sea-buckthorn-pulp.png";
@@ -63,7 +63,7 @@ export function FeaturedProducts({ showButtons = true }: { showButtons?: boolean
               key={i}
               className="bg-white rounded-3xl border border-border/50 p-6 md:p-8 flex flex-col md:flex-row items-center gap-8 shadow-sm hover-lift transition-all duration-500"
             >
-              <Link to="/products/$id" params={{ id: product.id }} className="w-full md:w-1/2 aspect-square rounded-2xl overflow-hidden bg-muted/30">
+              <Link to={`/products/${product.id}`} className="w-full md:w-1/2 aspect-square rounded-2xl overflow-hidden bg-muted/30">
                 <img
                   src={product.image}
                   alt={product.title}
@@ -71,7 +71,7 @@ export function FeaturedProducts({ showButtons = true }: { showButtons?: boolean
                 />
               </Link>
               <div className="w-full md:w-1/2 text-left">
-                <Link to="/products/$id" params={{ id: product.id }}>
+                <Link to={`/products/${product.id}`}>
                   <h3 className="font-display text-2xl md:text-3xl font-bold text-primary mb-2 hover:text-primary-glow transition-colors">
                     {product.title}
                   </h3>
@@ -103,7 +103,7 @@ export function FeaturedProducts({ showButtons = true }: { showButtons?: boolean
                   </Link>
                 </div>
                 <div className="mt-4">
-                  <Link to="/products/$id" params={{ id: product.id }} className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:text-primary-glow transition group">
+                  <Link to={`/products/${product.id}`} className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:text-primary-glow transition group">
                     View Full Details
                     <Leaf className="h-4 w-4 group-hover:rotate-12 transition-transform" />
                   </Link>
