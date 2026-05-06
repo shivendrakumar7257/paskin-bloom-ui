@@ -21,12 +21,9 @@ export function ContactCTA() {
             </li>
             <li className="flex items-center gap-4">
               <span className="grid place-items-center h-10 w-10 rounded-full bg-secondary text-primary"><Mail className="h-4 w-4" /></span>
-              <span className="text-sm">info@paskin.co.in</span>
+              <span className="text-sm">Paskin.info@gmail.com</span>
             </li>
-            <li className="flex items-center gap-4">
-              <span className="grid place-items-center h-10 w-10 rounded-full bg-secondary text-primary"><MapPin className="h-4 w-4" /></span>
-              <span className="text-sm">508, Ansal Sumangalam, RDC, Ghaziabad, 201002</span>
-            </li>
+
           </ul>
         </div>
 

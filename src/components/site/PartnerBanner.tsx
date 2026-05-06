@@ -7,13 +7,18 @@ export function PartnerBanner() {
       <div className="bg-[#1B4332] rounded-3xl p-8 md:p-12 flex flex-col lg:flex-row items-center justify-between gap-12 text-white shadow-elegant relative overflow-hidden">
         {/* Abstract Background Detail */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32 blur-3xl" />
-        
+
         <div className="max-w-md">
           <h2 className="font-display text-4xl md:text-5xl font-medium mb-4">
             Partner with Paskin
           </h2>
           <p className="text-white/80 text-lg">
             We are open for distribution, institutional supply and business collaborations.
+          </p>
+          <br />
+          <p className="text-white/80 text-lg">
+            <span className="font-bold">Email:</span> Paskin.info@gmail.com<br />
+            <span className="font-bold">Phone:</span> +91 9582824383
           </p>
         </div>
 

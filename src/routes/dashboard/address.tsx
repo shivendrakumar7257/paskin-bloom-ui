@@ -154,65 +154,69 @@ export default function DashboardAddress() {
           if (!open) resetForm();
         }}>
           <DialogTrigger asChild>
-            <Button className="rounded-full gap-2 shadow-lg hover:shadow-primary/20 transition-all px-6">
+            <Button className="w-full sm:w-auto rounded-full gap-2 shadow-lg hover:shadow-primary/20 transition-all px-6">
               <Plus className="h-4 w-4" />
               Add New Address
             </Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-md rounded-3xl">
-            <DialogHeader>
-              <DialogTitle className="text-2xl font-bold">
-                {editingAddress ? "Edit Address" : "Add New Address"}
+          <DialogContent className="sm:max-w-md rounded-[2.5rem] border-none shadow-2xl p-0 overflow-hidden">
+            <DialogHeader className="pt-10 px-8 pb-6 bg-[#f8f9f8]">
+              <DialogTitle className="text-3xl font-display font-medium text-center">
+                Add New <span className="italic text-primary">Address</span>
               </DialogTitle>
             </DialogHeader>
-            <div className="space-y-6 py-4">
+            <div className="px-8 py-8 space-y-6 bg-white">
               <div className="space-y-2">
-                <Label htmlFor="fullAddress">Full Address</Label>
+                <Label htmlFor="fullAddress" className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground ml-1">Full Address</Label>
                 <Input 
                   id="fullAddress" 
                   value={formData.fullAddress} 
                   onChange={handleInputChange}
                   placeholder="e.g. 123 Street, Area" 
-                  className="rounded-xl h-12"
+                  className="rounded-2xl h-14 border-slate-200 focus:border-primary focus:ring-primary/20 bg-slate-50/50" 
                 />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="city">City</Label>
+                  <Label htmlFor="city" className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground ml-1">City</Label>
                   <Input 
                     id="city" 
                     value={formData.city} 
                     onChange={handleInputChange}
                     placeholder="Bangalore" 
-                    className="rounded-xl h-12"
+                    className="rounded-2xl h-14 border-slate-200 focus:border-primary focus:ring-primary/20 bg-slate-50/50" 
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="pincode">Pincode</Label>
+                  <Label htmlFor="pincode" className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground ml-1">Pincode</Label>
                   <Input 
                     id="pincode" 
                     value={formData.pincode} 
                     onChange={handleInputChange}
                     placeholder="560001" 
-                    className="rounded-xl h-12"
+                    className="rounded-2xl h-14 border-slate-200 focus:border-primary focus:ring-primary/20 bg-slate-50/50" 
                   />
                 </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="country">Country</Label>
+                <Label htmlFor="country" className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground ml-1">Country</Label>
                 <Input 
                   id="country" 
                   value={formData.country} 
                   onChange={handleInputChange}
                   placeholder="India" 
-                  className="rounded-xl h-12"
+                  className="rounded-2xl h-14 border-slate-200 focus:border-primary focus:ring-primary/20 bg-slate-50/50" 
                 />
               </div>
             </div>
-            <DialogFooter className="gap-3 sm:gap-0">
-              <Button variant="ghost" onClick={() => setIsAddModalOpen(false)} className="rounded-xl h-12">Cancel</Button>
-              <Button onClick={handleSaveAddress} className="rounded-xl h-12 px-8">Save Address</Button>
-            </DialogFooter>
+            <div className="px-8 pb-10 flex flex-col gap-3 bg-white">
+              <Button onClick={handleSaveAddress} className="rounded-2xl h-14 text-base font-bold bg-primary hover:bg-primary-glow shadow-lg shadow-primary/20">
+                Save Address
+              </Button>
+              <Button variant="ghost" onClick={() => setIsAddModalOpen(false)} className="rounded-2xl h-14 text-sm font-bold text-muted-foreground hover:bg-slate-50">
+                Cancel
+              </Button>
+            </div>
           </DialogContent>
         </Dialog>
       </div>
@@ -231,8 +235,8 @@ export default function DashboardAddress() {
                 transition={{ duration: 0.3 }}
               >
                 <Card className="border-none shadow-soft hover:shadow-elegant transition-all group h-full">
-                  <CardContent className="p-8">
-                    <div className="flex justify-between items-start mb-6">
+                  <CardContent className="p-5 sm:p-8">
+                    <div className="flex justify-between items-start mb-4 sm:mb-6">
                       <div className="p-3 rounded-2xl bg-primary/5 text-primary">
                         <Icon className="h-6 w-6" />
                       </div>

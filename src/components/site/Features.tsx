@@ -30,13 +30,13 @@ const features = [
 
 export function Features() {
   return (
-    <section className="relative z-20 -mt-[140px] lg:-mt-[160px] container mx-auto px-6">
-      <div className="bg-white rounded-3xl shadow-elegant p-8 md:p-12 border border-border/50">
+    <section className="relative z-20 py-8 container mx-auto px-6">
+      <div className="bg-white rounded-3xl shadow-elegant p-4 md:p-6 border border-border/50">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-6">
           {features.map((feature, i) => (
             <div key={i} className="flex flex-col items-center text-center group">
-              <div className="mb-6 h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center text-primary transition-transform duration-500 group-hover:scale-110">
-                <feature.icon className="h-8 w-8" />
+              <div className="mb-4 h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center text-primary transition-transform duration-500 group-hover:scale-110">
+                <feature.icon className="h-6 w-6" />
               </div>
               <h3 className="font-display text-lg font-bold text-primary mb-3">
                 {feature.title}

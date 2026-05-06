@@ -7,20 +7,20 @@ import catVitamins from "@/assets/cat-vitamins.png";
 
 const categories = [
   {
+    image: catVitamins,
+    title: "Vitamins & Supplements",
+    description: "Essential nutrients to support your everyday wellness.",
+    icon: Syringe,
+    color: "bg-orange-100",
+    iconBg: "bg-orange-600",
+  },
+  {
     image: catAntibiotics,
-    title: "Antibiotics",
+    title: "Medicines",
     description: "Broad range of antibiotic medicines for various infections.",
     icon: Pill,
     color: "bg-blue-100",
     iconBg: "bg-blue-600",
-  },
-  {
-    image: catDerma,
-    title: "Derma",
-    description: "Advanced dermatology solutions for healthy skin.",
-    icon: Stethoscope,
-    color: "bg-green-100",
-    iconBg: "bg-green-600",
   },
   {
     image: catDental,
@@ -31,13 +31,15 @@ const categories = [
     iconBg: "bg-cyan-600",
   },
   {
-    image: catVitamins,
-    title: "Vitamins & Supplements",
-    description: "Essential nutrients to support your everyday wellness.",
-    icon: Syringe,
-    color: "bg-orange-100",
-    iconBg: "bg-orange-600",
+    image: catDerma,
+    title: "Derma",
+    description: "Advanced dermatology solutions for healthy skin.",
+    icon: Stethoscope,
+    color: "bg-green-100",
+    iconBg: "bg-green-600",
   },
+
+
 
 ];
 

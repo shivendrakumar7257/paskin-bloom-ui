@@ -16,12 +16,12 @@ export function Hero() {
   const [active, setActive] = useState(0);
 
   useEffect(() => {
-    const id = setInterval(() => setActive((i) => (i + 1) % slides.length), 1000);
+    const id = setInterval(() => setActive((i) => (i + 1) % slides.length), 3000);
     return () => clearInterval(id);
   }, []);
 
   return (
-    <section className="relative h-[100svh] min-h-[640px] w-full overflow-hidden">
+    <section className="relative h-[50vh] min-h-[500px] w-full overflow-hidden mt-[76px]">
       {slides.map((slide, i) => (
         <div
           key={i}
@@ -42,7 +42,7 @@ export function Hero() {
       <div className="absolute inset-0 bg-gradient-to-b from-foreground/40 via-foreground/30 to-foreground/70" />
 
       {/* Content */}
-      <div className="relative z-10 h-full container mx-auto px-6 flex flex-col justify-center pb-32 lg:pb-40 max-w-4xl">
+      <div className="relative z-10 h-full container mx-auto px-6 flex flex-col justify-center max-w-4xl">
 
 
         <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-medium text-background mt-6 leading-[1.05] text-balance animate-fade-up">
@@ -67,7 +67,7 @@ export function Hero() {
         </div>
 
         {/* Slide indicators */}
-        <div className="absolute bottom-48 lg:bottom-56 left-6 right-6 container mx-auto flex items-center gap-2">
+        <div className="absolute bottom-10 left-6 right-6 container mx-auto flex items-center gap-2">
           {slides.map((_, i) => (
             <button
               key={i}
