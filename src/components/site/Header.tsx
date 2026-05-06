@@ -4,6 +4,8 @@ import logo from "@/assets/logo.png";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { useCart } from "@/hooks/use-cart";
+import { useAuth } from "@/hooks/use-auth";
+import { useNavigate } from "react-router-dom";
 
 const navItems = [
   { to: "/", label: "Home" },
@@ -22,6 +24,14 @@ export function Header() {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   
   const { items, totalItems, totalPrice, updateQuantity, removeFromCart } = useCart();
+  const { isLoggedIn, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    setUserMenuOpen(false);
+    navigate("/");
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -78,8 +88,18 @@ export function Header() {
             </button>
             {userMenuOpen && (
               <div className="absolute right-0 mt-2 w-48 bg-white border border-border rounded-2xl shadow-elegant p-2 animate-fade-in z-50">
-                <Link to="/login" onClick={() => setUserMenuOpen(false)} className="block px-4 py-2 hover:bg-slate-50 rounded-lg text-sm font-medium">Log In</Link>
-                <Link to="/signup" onClick={() => setUserMenuOpen(false)} className="block px-4 py-2 hover:bg-slate-50 rounded-lg text-sm font-medium">Sign Up</Link>
+                {!isLoggedIn ? (
+                  <>
+                    <Link to="/login" onClick={() => setUserMenuOpen(false)} className="block px-4 py-2 hover:bg-slate-50 rounded-lg text-sm font-medium">Log In</Link>
+                    <Link to="/signup" onClick={() => setUserMenuOpen(false)} className="block px-4 py-2 hover:bg-slate-50 rounded-lg text-sm font-medium">Sign Up</Link>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/dashboard" onClick={() => setUserMenuOpen(false)} className="block px-4 py-2 hover:bg-slate-50 rounded-lg text-sm font-medium">My Dashboard</Link>
+                    <Link to="/dashboard/orders" onClick={() => setUserMenuOpen(false)} className="block px-4 py-2 hover:bg-slate-50 rounded-lg text-sm font-medium">My Orders</Link>
+                    <button onClick={handleLogout} className="w-full text-left px-4 py-2 hover:bg-slate-50 rounded-lg text-sm font-medium text-destructive">Logout</button>
+                  </>
+                )}
                 <div className="h-px bg-slate-100 my-2" />
                 <Link to="/contact" onClick={() => setUserMenuOpen(false)} className="block px-4 py-2 hover:bg-slate-50 rounded-lg text-sm font-medium">Help Center</Link>
               </div>
@@ -250,8 +270,26 @@ export function Header() {
               ))}
             </ul>
             <div className="mt-auto pt-8 border-t border-slate-100 space-y-4">
-               <Link to="/login" onClick={() => setOpen(false)} className="block w-full h-14 bg-slate-100 rounded-2xl flex items-center justify-center font-bold">Log In</Link>
-               <Link to="/signup" onClick={() => setOpen(false)} className="block w-full h-14 bg-primary text-white rounded-2xl flex items-center justify-center font-bold">Sign Up</Link>
+               {!isLoggedIn ? (
+                 <>
+                   <Link to="/login" onClick={() => setOpen(false)} className="block w-full h-14 bg-slate-100 rounded-2xl flex items-center justify-center font-bold">Log In</Link>
+                   <Link to="/signup" onClick={() => setOpen(false)} className="block w-full h-14 bg-primary text-white rounded-2xl flex items-center justify-center font-bold">Sign Up</Link>
+                 </>
+               ) : (
+                 <>
+                   <Link to="/dashboard" onClick={() => setOpen(false)} className="block w-full h-14 bg-slate-100 rounded-2xl flex items-center justify-center font-bold">My Dashboard</Link>
+                   <button 
+                    onClick={() => {
+                      logout();
+                      setOpen(false);
+                      navigate("/");
+                    }} 
+                    className="block w-full h-14 border border-destructive text-destructive rounded-2xl flex items-center justify-center font-bold"
+                   >
+                     Logout
+                   </button>
+                 </>
+               )}
             </div>
           </nav>
         </div>

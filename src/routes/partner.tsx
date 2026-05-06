@@ -74,15 +74,15 @@ export default function PartnerPage() {
                 <div className="space-y-4">
                   <div className="flex items-center gap-4 text-muted-foreground">
                     <Mail className="h-5 w-5 text-primary" />
-                    <span>partnerships@paskincare.com</span>
+                    <span>info@paskin.co.in</span>
                   </div>
                   <div className="flex items-center gap-4 text-muted-foreground">
                     <Phone className="h-5 w-5 text-primary" />
-                    <span>+91 98765 43210</span>
+                    <span>+91 9582824383</span>
                   </div>
                   <div className="flex items-center gap-4 text-muted-foreground">
                     <MapPin className="h-5 w-5 text-primary" />
-                    <span>123 Pharma Plaza, New Delhi, India</span>
+                    <span>508, Ansal Sumangalam, RDC, Ghaziabad, 201002</span>
                   </div>
                 </div>
               </div>

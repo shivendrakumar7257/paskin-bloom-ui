@@ -18,7 +18,7 @@ export function Footer() {
           </p>
           <div className="flex items-center gap-3 mt-6">
             {[
-              { Icon: Instagram, href: "#" },
+              { Icon: Instagram, href: "https://www.instagram.com/paskin_health/" },
               { Icon: Facebook, href: "https://www.facebook.com/profile.php?id=61578746242700" },
               { Icon: Twitter, href: "#" },
               { Icon: Youtube, href: "#" },

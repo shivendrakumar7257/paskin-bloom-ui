@@ -17,15 +17,15 @@ export function ContactCTA() {
           <ul className="mt-8 space-y-4">
             <li className="flex items-center gap-4">
               <span className="grid place-items-center h-10 w-10 rounded-full bg-secondary text-primary"><Phone className="h-4 w-4" /></span>
-              <span className="text-sm">+91 98765 43210</span>
+              <span className="text-sm">+91 9582824383</span>
             </li>
             <li className="flex items-center gap-4">
               <span className="grid place-items-center h-10 w-10 rounded-full bg-secondary text-primary"><Mail className="h-4 w-4" /></span>
-              <span className="text-sm">hello@paskin.com</span>
+              <span className="text-sm">info@paskin.co.in</span>
             </li>
             <li className="flex items-center gap-4">
               <span className="grid place-items-center h-10 w-10 rounded-full bg-secondary text-primary"><MapPin className="h-4 w-4" /></span>
-              <span className="text-sm">42 Wellness Lane, Bengaluru, India</span>
+              <span className="text-sm">508, Ansal Sumangalam, RDC, Ghaziabad, 201002</span>
             </li>
           </ul>
         </div>

@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Link, Outlet } from "react-router-dom";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { CartProvider } from "@/hooks/use-cart";
+import { AuthProvider } from "@/hooks/use-auth";
 
 // Pages
 import Index from "./routes/index";
@@ -16,6 +17,22 @@ import SignupPage from "./routes/signup";
 import ProductsLayout from "./routes/products";
 import ProductsPage from "./routes/products.index";
 import ProductDetailsPage from "./routes/products.$id";
+
+// Dashboard
+import { DashboardLayout } from "./components/dashboard/DashboardLayout";
+import DashboardIndex from "./routes/dashboard/index";
+import DashboardCart from "./routes/dashboard/cart";
+import DashboardOrders from "./routes/dashboard/orders";
+import DashboardAddress from "./routes/dashboard/address";
+
+// Admin
+import { AdminLayout } from "./layouts/admin/AdminLayout";
+import AdminLogin from "./routes/admin/login";
+import AdminDashboard from "./routes/admin/dashboard";
+import AdminCategories from "./routes/admin/categories";
+import AdminProducts from "./routes/admin/products";
+import AdminOrders from "./routes/admin/orders";
+import AdminBlog from "./routes/admin/blog";
 
 function Layout() {
   return (
@@ -48,8 +65,9 @@ function NotFound() {
 
 export default function App() {
   return (
-    <CartProvider>
-      <BrowserRouter>
+    <AuthProvider>
+      <CartProvider>
+        <BrowserRouter>
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<Index />} />
@@ -69,8 +87,26 @@ export default function App() {
 
             <Route path="*" element={<NotFound />} />
           </Route>
+
+          <Route path="/dashboard" element={<DashboardLayout />}>
+            <Route index element={<DashboardIndex />} />
+            <Route path="cart" element={<DashboardCart />} />
+            <Route path="orders" element={<DashboardOrders />} />
+            <Route path="address" element={<DashboardAddress />} />
+          </Route>
+
+          {/* Admin Panel */}
+          <Route path="/admin" element={<AdminLogin />} />
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route path="dashboard" element={<AdminDashboard />} />
+            <Route path="category" element={<AdminCategories />} />
+            <Route path="products" element={<AdminProducts />} />
+            <Route path="orders" element={<AdminOrders />} />
+            <Route path="blog" element={<AdminBlog />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </CartProvider>
-  );
+  </AuthProvider>
+);
 }

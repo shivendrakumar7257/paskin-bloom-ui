@@ -1,0 +1,316 @@
+import { useState } from "react";
+import { 
+  MapPin, 
+  Plus, 
+  Edit2, 
+  Trash2, 
+  Home, 
+  Briefcase, 
+  Globe 
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { motion, AnimatePresence } from "framer-motion";
+import { toast } from "sonner";
+
+interface Address {
+  id: string;
+  type: "home" | "work" | "other";
+  fullAddress: string;
+  city: string;
+  pincode: string;
+  country: string;
+}
+
+const INITIAL_ADDRESSES: Address[] = [
+  {
+    id: "addr-1",
+    type: "home",
+    fullAddress: "123 Green Valley, Serene Heights",
+    city: "Bangalore",
+    pincode: "560001",
+    country: "India",
+  },
+  {
+    id: "addr-2",
+    type: "work",
+    fullAddress: "789 Innovation Hub, Tech Park",
+    city: "Mumbai",
+    pincode: "400001",
+    country: "India",
+  },
+];
+
+export default function DashboardAddress() {
+  const [addresses, setAddresses] = useState<Address[]>(INITIAL_ADDRESSES);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [editingAddress, setEditingAddress] = useState<Address | null>(null);
+
+  // Form State
+  const [formData, setFormData] = useState({
+    type: "home",
+    fullAddress: "",
+    city: "",
+    pincode: "",
+    country: "India",
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({ ...prev, [id]: value }));
+  };
+
+  const handleSaveAddress = () => {
+    if (!formData.fullAddress || !formData.city || !formData.pincode) {
+      toast.error("Please fill all required fields");
+      return;
+    }
+
+    if (editingAddress) {
+      setAddresses(prev => prev.map(addr => 
+        addr.id === editingAddress.id ? { ...formData, id: addr.id } as Address : addr
+      ));
+      toast.success("Address updated successfully");
+    } else {
+      const newAddress: Address = {
+        ...formData,
+        id: `addr-${Date.now()}`,
+      } as Address;
+      setAddresses(prev => [...prev, newAddress]);
+      toast.success("Address added successfully");
+    }
+
+    resetForm();
+    setIsAddModalOpen(false);
+  };
+
+  const handleDeleteAddress = (id: string) => {
+    setAddresses(prev => prev.filter(addr => addr.id !== id));
+    toast.success("Address deleted successfully");
+  };
+
+  const resetForm = () => {
+    setFormData({
+      type: "home",
+      fullAddress: "",
+      city: "",
+      pincode: "",
+      country: "India",
+    });
+    setEditingAddress(null);
+  };
+
+  const openEditModal = (address: Address) => {
+    setEditingAddress(address);
+    setFormData({
+      type: address.type,
+      fullAddress: address.fullAddress,
+      city: address.city,
+      pincode: address.pincode,
+      country: address.country,
+    });
+    setIsAddModalOpen(true);
+  };
+
+  const getAddressIcon = (type: string) => {
+    switch (type) {
+      case "home": return Home;
+      case "work": return Briefcase;
+      default: return MapPin;
+    }
+  };
+
+  return (
+    <div className="space-y-8">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div>
+          <h1 className="text-3xl font-display font-bold tracking-tight">Saved Addresses</h1>
+          <p className="text-muted-foreground mt-1">Manage your shipping and billing addresses.</p>
+        </div>
+
+        <Dialog open={isAddModalOpen} onOpenChange={(open) => {
+          setIsAddModalOpen(open);
+          if (!open) resetForm();
+        }}>
+          <DialogTrigger asChild>
+            <Button className="rounded-full gap-2 shadow-lg hover:shadow-primary/20 transition-all px-6">
+              <Plus className="h-4 w-4" />
+              Add New Address
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-md rounded-3xl">
+            <DialogHeader>
+              <DialogTitle className="text-2xl font-bold">
+                {editingAddress ? "Edit Address" : "Add New Address"}
+              </DialogTitle>
+            </DialogHeader>
+            <div className="space-y-6 py-4">
+              <div className="space-y-2">
+                <Label htmlFor="fullAddress">Full Address</Label>
+                <Input 
+                  id="fullAddress" 
+                  value={formData.fullAddress} 
+                  onChange={handleInputChange}
+                  placeholder="e.g. 123 Street, Area" 
+                  className="rounded-xl h-12"
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="city">City</Label>
+                  <Input 
+                    id="city" 
+                    value={formData.city} 
+                    onChange={handleInputChange}
+                    placeholder="Bangalore" 
+                    className="rounded-xl h-12"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="pincode">Pincode</Label>
+                  <Input 
+                    id="pincode" 
+                    value={formData.pincode} 
+                    onChange={handleInputChange}
+                    placeholder="560001" 
+                    className="rounded-xl h-12"
+                  />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="country">Country</Label>
+                <Input 
+                  id="country" 
+                  value={formData.country} 
+                  onChange={handleInputChange}
+                  placeholder="India" 
+                  className="rounded-xl h-12"
+                />
+              </div>
+            </div>
+            <DialogFooter className="gap-3 sm:gap-0">
+              <Button variant="ghost" onClick={() => setIsAddModalOpen(false)} className="rounded-xl h-12">Cancel</Button>
+              <Button onClick={handleSaveAddress} className="rounded-xl h-12 px-8">Save Address</Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <AnimatePresence mode="popLayout">
+          {addresses.map((address) => {
+            const Icon = getAddressIcon(address.type);
+            return (
+              <motion.div
+                key={address.id}
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.3 }}
+              >
+                <Card className="border-none shadow-soft hover:shadow-elegant transition-all group h-full">
+                  <CardContent className="p-8">
+                    <div className="flex justify-between items-start mb-6">
+                      <div className="p-3 rounded-2xl bg-primary/5 text-primary">
+                        <Icon className="h-6 w-6" />
+                      </div>
+                      <div className="flex gap-2">
+                        <Button 
+                          variant="ghost" 
+                          size="icon" 
+                          onClick={() => openEditModal(address)}
+                          className="h-10 w-10 rounded-full hover:bg-slate-50 text-muted-foreground hover:text-foreground"
+                        >
+                          <Edit2 className="h-4 w-4" />
+                        </Button>
+                        
+                        <AlertDialog>
+                          <AlertDialogTrigger asChild>
+                            <Button 
+                              variant="ghost" 
+                              size="icon"
+                              className="h-10 w-10 rounded-full hover:bg-destructive/5 text-muted-foreground hover:text-destructive"
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
+                          </AlertDialogTrigger>
+                          <AlertDialogContent className="rounded-3xl">
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                              <AlertDialogDescription>
+                                This will permanently delete this address from your account.
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel className="rounded-xl">Cancel</AlertDialogCancel>
+                              <AlertDialogAction 
+                                onClick={() => handleDeleteAddress(address.id)}
+                                className="rounded-xl bg-destructive hover:bg-destructive/90"
+                              >
+                                Delete
+                              </AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
+                      </div>
+                    </div>
+
+                    <div className="space-y-4">
+                      <div>
+                        <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-1">Address</p>
+                        <p className="font-medium text-foreground">{address.fullAddress}</p>
+                      </div>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-1">City</p>
+                          <p className="text-sm font-medium">{address.city}</p>
+                        </div>
+                        <div>
+                          <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-1">Pincode</p>
+                          <p className="text-sm font-medium">{address.pincode}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2 pt-2 border-t border-slate-50 text-muted-foreground">
+                        <Globe className="h-3.5 w-3.5" />
+                        <span className="text-xs font-medium">{address.country}</span>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            );
+          })}
+        </AnimatePresence>
+
+        {addresses.length === 0 && (
+          <div className="col-span-full py-20 text-center bg-white rounded-3xl border-2 border-dashed border-slate-100">
+            <MapPin className="h-12 w-12 text-muted-foreground mx-auto mb-4 stroke-1 opacity-20" />
+            <p className="text-muted-foreground font-medium">No saved addresses. Add one to get started!</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
