@@ -17,6 +17,11 @@ import SignupPage from "./routes/signup";
 import ProductsLayout from "./routes/products";
 import ProductsPage from "./routes/products.index";
 import ProductDetailsPage from "./routes/products.$id";
+import ShippingPolicyPage from "./routes/shipping-policy";
+import PrivacyPolicyPage from "./routes/privacy-policy";
+import TermsConditionsPage from "./routes/terms-and-conditions";
+import ReturnsPolicyPage from "./routes/returns-policy";
+
 
 // Dashboard
 import { DashboardLayout } from "./components/dashboard/DashboardLayout";
@@ -79,6 +84,11 @@ export default function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/partner" element={<PartnerPage />} />
             <Route path="/signup" element={<SignupPage />} />
+            <Route path="/shipping-policy" element={<ShippingPolicyPage />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+            <Route path="/terms-and-conditions" element={<TermsConditionsPage />} />
+            <Route path="/returns-policy" element={<ReturnsPolicyPage />} />
+
             
             <Route path="/products" element={<ProductsLayout />}>
               <Route index element={<ProductsPage />} />
